@@ -1,0 +1,7 @@
+[flake8]
+; We use a line length of 120 instead of pep8's default 79
+max-line-length = 120
+; Files not checked;
+exclude = stievie/connectors/GSSDK.py,mv/settings.*
+; Cyclomatic complexity check with mccabe. Should be pushed down further.
+max-complexity = 30
