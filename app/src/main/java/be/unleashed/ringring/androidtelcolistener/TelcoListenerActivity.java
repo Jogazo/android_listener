@@ -1,5 +1,8 @@
 package be.unleashed.ringring.androidtelcolistener;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -9,15 +12,37 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class TelcoListenerActivity extends AppCompatActivity {
-
+    public static final String tag = MySMSMailBox.tag;
     private TextView telMgrOutput;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        Log.d("androidtelcolistener", "TelcoListenerActivity onCreate");
-
+        Log.d(tag, "TelcoListenerActivity onCreate");
+        boolean close_no_permissions = false;
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_telco_listener);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.e(tag, "ERROR: enable RECEIVE_SMS permission on device");
+            close_no_permissions = true;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.e(tag, "ERROR: enable READ_PHONE_STATE permission on device");
+            close_no_permissions = true;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.e(tag, "ERROR: enable READ_SMS permission on device");
+            close_no_permissions = true;
+        }
+
+        if (close_no_permissions){
+            finish();
+        }
 
         this.telMgrOutput = (TextView) findViewById(R.id.telmgroutput);
     }
@@ -59,7 +84,7 @@ public class TelcoListenerActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         sb.append("telMgr - call state = " + callStateString);
 
-        Log.w("androidtelcolistener", "callStateString: " + callStateString);
+        Log.w(tag, "callStateString: " + callStateString);
         return sb.toString();
     }
 

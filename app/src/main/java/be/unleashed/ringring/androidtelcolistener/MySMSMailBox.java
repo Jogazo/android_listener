@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- * Created by johan on 3/03/18.
+ * Created by jogazo on 3/03/18.
  */
 
 public class MySMSMailBox extends BroadcastReceiver {
@@ -20,7 +20,6 @@ public class MySMSMailBox extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent){
         String action = intent.getAction();
 
-        // TODO: If no permission given, show an error on logcat.
         if (action.equals("android.provider.Telephony.SMS_RECEIVED")){
             StringBuilder sb = new StringBuilder();
 
