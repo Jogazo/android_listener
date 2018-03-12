@@ -102,47 +102,4 @@ public class TelcoListenerActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    /**
-     * Perform an HTTP GET with HttpUrlConnection.
-     *
-     * @param location
-     * @return
-     */
-    private String getHttpResponse(String location) {
-        String result = null;
-        URL url = null;
-        Log.d(tag, " " + " location = " + location);
-
-        try {
-            url = new URL(location);
-            Log.d(tag, " " + " url = " + url);
-        } catch (MalformedURLException e) {
-            Log.e(tag, " " + " " + e.getMessage());
-        }
-
-        if (url != null) {
-            try {
-                HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-                BufferedReader in = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-                String inputLine;
-
-                int lineCount = 0; // limit the lines for the example
-                while ((lineCount < 10) && ((inputLine = in.readLine()) != null)) {
-                    lineCount++;
-                    Log.v(tag, " " + " inputLine = " + inputLine);
-                    result += "\n" + inputLine;
-                }
-
-                in.close();
-                urlConn.disconnect();
-
-            } catch (IOException e) {
-                Log.e(tag, " " + " " + e.getMessage());
-            }
-        } else {
-            Log.e(tag, " " + " url NULL");
-        }
-        return result;
-    }
-
 }
