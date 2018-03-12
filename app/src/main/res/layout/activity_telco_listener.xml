@@ -19,4 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142" />
 
+    <EditText
+        android:id="@+id/get_input"
+        android:layout_width="327dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="http://ipv4.download.thinkbroadband.com/5MB.zip"
+        android:textColor="@android:color/holo_green_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="131dp" />
+
 </android.support.constraint.ConstraintLayout>
