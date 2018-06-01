@@ -8,6 +8,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by jogazo on 3/03/18.
@@ -34,6 +35,7 @@ public class MySMSMailBox extends BroadcastReceiver {
                 messages.add(SmsMessage.createFromPdu((byte[])pdu));
             }
 
+            byte[] messageBytes = {};
             String messageBody = new String();
             for (int index = 0; index < messages.size(); index ++) {
                 messageBody += messages.get(index).getMessageBody();
@@ -43,7 +45,8 @@ public class MySMSMailBox extends BroadcastReceiver {
             sb.append("SMS received from\t" + phoneNumber.toString());
 
             if (messageBody != null) {
-                sb.append("\twith content:\t" + messageBody.toString());
+                String noNewLineMessageBody = messageBody.replace("\n", " ");
+                sb.append("\twith content:\t" + noNewLineMessageBody.toString());
             }
 
             Log.w(tag, sb.toString());
